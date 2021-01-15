@@ -1,0 +1,53 @@
+{
+    "name": "Webinar YES",
+    "short_name": "Webinar YES",
+    "theme_color": "#5451E8",
+    "background_color": "#5451E8",
+    "description": "Your reliable webinar platform",
+    "display": "standalone",
+    "start_url": "/",
+    "icons": [
+      {
+        "src": "./assets/icons/maskable_icon_x72.png",
+        "sizes": "72x72",
+        "type": "image/png",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "./assets/icons/maskable_icon_x96.png",
+        "sizes": "96x96",
+        "type": "image/png",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "./assets/icons/maskable_icon_x128.png",
+        "sizes": "128x128",
+        "type": "image/png",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "./assets/icons/maskable_icon_x144.png",
+        "sizes": "144x144",
+        "type": "image/png",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "./assets/icons/maskable_icon_x152.png",
+        "sizes": "152x152",
+        "type": "image/png",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "./assets/icons/maskable_icon_x384.png",
+        "sizes": "384x384",
+        "type": "image/png",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "./assets/icons/maskable_icon_x512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any maskable"
+      }
+    ]
+  }

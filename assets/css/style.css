@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
+
+.preloader-bg {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     background-image: linear-gradient(1.95deg, #2bd6c1 38.84%, #5451e8 126.5%);
+     position: fixed;
+     z-index: 999;
+     top: 0;
+     left: 0;
+     right: 0;
+     bottom: 0;
+}
+
+.preloader-img {
+     display: block;
+     margin: 0 auto;
+     width: 290px;
+}
+
+.preloader-title {
+     display: block;
+     text-align: center;
+     margin-top: 35px;
+     font-size: 30px;
+     font-family: "Raleway", sans-serif;
+     color: white;
+}
