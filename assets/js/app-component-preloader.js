@@ -11,7 +11,7 @@ class splashScreen extends HTMLElement {
         this.innerHTML = `
           <div class="preloader-bg">
                <div>
-                    <img src="./assets/icons/logocolor-transparent.png" class="preloader-img"></img>
+                    <img src="/assets/icons/logocolor-transparent.png" class="preloader-img"></img>
                     <h1 class="preloader-title">Aplikasi pengelola keuangan andalan kamu</h1>
                </div>
           </div> 
