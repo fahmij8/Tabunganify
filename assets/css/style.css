@@ -88,7 +88,7 @@ body {
 
 /* login */
 .log-bg {
-    background: url("/assets/images/background.png") no-repeat;
+    background: url("./assets/images/background.png") no-repeat;
     background-size: 170% 70%;
     background-position-y: center;
     position: fixed;
