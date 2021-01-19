@@ -1,29 +1,164 @@
-@import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap");
 
+body {
+    background-color: #f7f8fb;
+}
+
+/*screen differentiatior*/
+@media screen and (max-width: 600px) {
+    .disallowed {
+        display: none;
+        visibility: hidden;
+    }
+    .allowed {
+        max-width: 600px;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .disallowed {
+        display: block;
+        visibility: visible;
+    }
+    .allowed {
+        display: none;
+        visibility: hidden;
+    }
+}
+
+/* Strict Screen */
+.strict-bg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(1.95deg, #2bd6c1 38.84%, #5451e8 126.5%);
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.strict-img {
+    display: block;
+    margin: 0 auto;
+    width: 290px;
+}
+
+.strict-title {
+    display: block;
+    text-align: center;
+    margin-top: 35px;
+    font-size: 18px;
+    font-family: "Nunito", sans-serif;
+    color: white;
+}
+
+/* Preloader Screen */
 .preloader-bg {
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     background-image: linear-gradient(1.95deg, #2bd6c1 38.84%, #5451e8 126.5%);
-     position: fixed;
-     z-index: 999;
-     top: 0;
-     left: 0;
-     right: 0;
-     bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f7f8fb;
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: opacity 0.3s;
 }
 
 .preloader-img {
-     display: block;
-     margin: 0 auto;
-     width: 290px;
+    display: block;
+    margin: 0 auto;
+    width: 290px;
 }
 
 .preloader-title {
-     display: block;
-     text-align: center;
-     margin-top: 35px;
-     font-size: 30px;
-     font-family: "Raleway", sans-serif;
-     color: white;
+    display: block;
+    text-align: center;
+    margin-top: 35px;
+    font-size: 15px;
+    font-family: "Nunito", sans-serif;
+    font-weight: 600;
+    color: rgb(0, 0, 0);
+}
+
+/* login */
+.log-bg {
+    background: url("/assets/images/background.png") no-repeat;
+    background-size: 170% 70%;
+    background-position-y: center;
+    position: fixed;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    filter: blur(5px);
+}
+
+.log-content {
+    position: fixed;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.log-content-img {
+    height: 75px;
+    background-color: white;
+    padding: 10px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 16px;
+    display: block;
+    margin: 0 auto;
+}
+
+.log-content h1 {
+    font-family: "Nunito", sans-serif;
+    font-weight: 700;
+    font-size: 25px;
+    color: #270949;
+    margin-top: 8px;
+    text-align: center;
+}
+
+.log-content button {
+    font-family: "Nunito", sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    display: block;
+    margin: 120px auto 0 auto;
+    padding: 11px 14px;
+    height: 46px;
+    text-transform: none;
+    line-height: 26px;
+    border-radius: 16px;
+}
+
+.log-google-icon {
+    display: block;
+    float: left;
+    margin-right: 10px;
+}
+
+.log-content h2 {
+    font-family: "Nunito", sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    color: #8a8a8a;
+    margin: 146px 30px 0 30px;
+    text-align: center;
+}
+
+.log-content > div > h2 > b {
+    font-weight: 700;
 }
