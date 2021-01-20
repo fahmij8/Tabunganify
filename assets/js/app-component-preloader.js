@@ -9,9 +9,9 @@ class splashScreen extends HTMLElement {
 
     render() {
         this.innerHTML = `
-          <div class="preloader-bg">
+          <div class="preloader-bg" id="preloader-active">
                <div>
-                    <img src="./assets/icons/logocolor-transparent.png" class="preloader-img"></img>
+                    <img src="./assets/icons/logocolor-transparent.png" class="preloader-img" alt="Logo Tabunganify" />
                     <h1 class="preloader-title">Aplikasi pengelola keuangan andalan kamu</h1>
                </div>
           </div> 

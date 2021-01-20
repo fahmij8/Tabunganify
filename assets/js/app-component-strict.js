@@ -12,7 +12,7 @@ class strictScreen extends HTMLElement {
         <div class="strict-bg">
             <div class="strict-bg">
                 <div>
-                    <img src="./assets/icons/logocolor-transparent.png" class="strict-img" />
+                    <img src="./assets/icons/logocolor-transparent.png" class="strict-img" alt="Logo Tabunganify" />
                     <h1 class="strict-title">Mohon maaf, layanan kami hanya tersedia pada device Handphone untuk saat ini.</h1>
                 </div>
             </div>

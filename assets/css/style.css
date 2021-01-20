@@ -1,7 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap");
 
 body {
     background-color: #f7f8fb;
+    font-family: "Ubuntu", sans-serif;
 }
 
 /*screen differentiatior*/
@@ -161,4 +163,97 @@ body {
 
 .log-content > div > h2 > b {
     font-weight: 700;
+}
+
+/* Dashboard */
+.dash-top {
+    background-color: #4654a3;
+    height: 180px;
+}
+
+#user-ava {
+    margin-top: 38px;
+    margin-left: 7px;
+    max-height: 72px;
+    border-radius: 10px;
+}
+
+.dash-greet {
+    font-family: "Nunito", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: white;
+    margin-top: 55px;
+    margin-bottom: 0;
+    margin-left: 20px;
+}
+
+#icon-bell {
+    position: fixed;
+    top: 30px;
+    right: 25px;
+}
+
+#user-nick {
+    font-family: "Nunito", sans-serif;
+    font-weight: 700;
+    font-size: 25px;
+    color: white;
+    margin-top: 0;
+    margin-left: 20px;
+}
+
+.dash-user {
+    display: inline-flex;
+}
+
+.dash-bottom {
+    position: fixed;
+    background-color: #f7f8fb;
+    border-radius: 35px;
+    top: 140px;
+    left: 0;
+    right: 0;
+}
+
+.dash-saldo {
+    font-weight: 400;
+    font-size: 20px;
+    margin-top: 31px;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.dash-saldo-a {
+    font-weight: 700;
+    margin-top: 0;
+    font-size: 25px;
+    text-align: center;
+}
+
+.dash-box {
+    align-items: center;
+    background-color: white;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.dash-box div {
+    margin-top: 15px;
+}
+
+.dash-box h1 {
+    font-weight: 400;
+    font-size: 13px;
+    text-align: center;
+    margin: 0;
+}
+
+.dash-box h2 {
+    font-weight: 500;
+    font-size: 17px;
+    margin: 2px 0 15px 0;
 }

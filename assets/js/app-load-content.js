@@ -1,15 +1,24 @@
+import { renderButton, signOut, auth2, checkExistingUser } from "./app-google-connect.js";
+
+let timeoutDestroy;
+
 const loadPage = (page) => {
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = () => {
         if (xhttp.readyState === 4) {
-            setTimeout(() => {
-                document.querySelector("splash-screen").destroy();
-            }, 500);
+            if (document.getElementById("preloader-active") !== null) {
+                clearTimeout(timeoutDestroy); // Prevent 2 times calling timeout
+                timeoutDestroy = setTimeout(() => {
+                    document.querySelector("splash-screen").destroy();
+                }, 500);
+            }
             let content = document.querySelector(".content");
             if (xhttp.status === 200) {
                 content.innerHTML = xhttp.responseText;
-                if (page === "dashboard") {
-                } else {
+                if (page === "login") {
+                    renderButton();
+                } else if (page === "dashboard") {
+                    checkExistingUser();
                 }
             } else if (xhttp.status == 404) {
                 content.innerHTML = "<p>Halaman tidak ditemukan.</p>";
@@ -24,7 +33,7 @@ const loadPage = (page) => {
 
 const routePage = () => {
     let page = window.location.hash.substr(1);
-    if (page == "") page = "dashboard";
+    if (page == "") page = "login";
     loadPage(page);
 };
 
