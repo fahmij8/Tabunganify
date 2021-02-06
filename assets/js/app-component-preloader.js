@@ -29,4 +29,10 @@ class splashScreen extends HTMLElement {
     }
 }
 
-export { splashScreen };
+let destroySplashScreen = () => {
+    if (document.getElementById("preloader-active") !== null) {
+        document.querySelector("splash-screen").destroy();
+    }
+};
+
+export { splashScreen, destroySplashScreen };
