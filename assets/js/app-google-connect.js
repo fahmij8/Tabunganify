@@ -1,5 +1,5 @@
 import { routePage } from "./app-load-content.js";
-import { fillTopElement } from "./app-pages-dashboard.js";
+import { fillTopElement, onClickNav } from "./app-pages-dashboard.js";
 import { destroySplashScreen } from "./app-component-preloader.js";
 
 let auth2 = gapi.auth2.init({
@@ -34,8 +34,20 @@ const onSignIn = (googleUser) => {
         window.location.href = "./#dashboard";
         routePage();
     } else if (location === "dashboard") {
+        fillTopElement(googleUser);
+        onClickNav();
+        destroySplashScreen();
+    } else if (location === "rekapitulasi") {
         let isLoggedIn = checkExistingUser();
-        isLoggedIn === true ? fillTopElement(googleUser) : null;
+        destroySplashScreen();
+    } else if (location === "analisis") {
+        let isLoggedIn = checkExistingUser();
+        destroySplashScreen();
+    } else if (location === "profil") {
+        let isLoggedIn = checkExistingUser();
+        destroySplashScreen();
+    } else {
+        let isLoggedIn = checkExistingUser();
         destroySplashScreen();
     }
 };

@@ -88,6 +88,11 @@ body {
     color: rgb(0, 0, 0);
 }
 
+/* Basic Fade */
+.content {
+    transition: opacity 0.3s;
+}
+
 /* login */
 .log-bg {
     background: url("../images/background.png") no-repeat;

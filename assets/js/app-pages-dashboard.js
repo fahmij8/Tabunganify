@@ -1,3 +1,5 @@
+import { routePage } from "./app-load-content.js";
+
 const fillTopElement = (googleUser) => {
     let userAvatar = googleUser.getBasicProfile().getImageUrl();
     let userNickname = googleUser.getBasicProfile().getName();
@@ -10,4 +12,14 @@ const fillTopElement = (googleUser) => {
     userNicknameElement.innerHTML = `${userNickname}`;
 };
 
-export { fillTopElement };
+const onClickNav = () => {
+    document.querySelectorAll("body > div > div.dash-bottom > div.dash-navbar a").forEach((link) => {
+        link.onclick = () => {
+            let linklen = link.href.split("/");
+            window.location.href = `./${linklen[linklen.length - 1]}`;
+            routePage();
+        };
+    });
+};
+
+export { fillTopElement, onClickNav };
