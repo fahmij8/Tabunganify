@@ -1,6 +1,8 @@
 import { routePage } from "./app-load-content.js";
 import { fillTopElement, onClickNav } from "./app-pages-dashboard.js";
 import { destroySplashScreen } from "./app-component-preloader.js";
+import { backHandler } from "./app-component-back.js";
+import { fillProfileElement } from "./app-pages-profile.js";
 
 let auth2 = gapi.auth2.init({
     client_id: "34406752556-4o4ekkabd87m3711gi3r14sv19or5rdm.apps.googleusercontent.com",
@@ -38,16 +40,17 @@ const onSignIn = (googleUser) => {
         onClickNav();
         destroySplashScreen();
     } else if (location === "rekapitulasi") {
-        let isLoggedIn = checkExistingUser();
+        backHandler();
         destroySplashScreen();
     } else if (location === "analisis") {
-        let isLoggedIn = checkExistingUser();
+        backHandler();
         destroySplashScreen();
     } else if (location === "profil") {
-        let isLoggedIn = checkExistingUser();
+        backHandler();
+        fillProfileElement(googleUser);
         destroySplashScreen();
     } else {
-        let isLoggedIn = checkExistingUser();
+        // Tambah page
         destroySplashScreen();
     }
 };
@@ -61,14 +64,6 @@ const signOut = () => {
     auth2.signOut().then(() => {
         console.log("User signed out.");
     });
-};
-
-const checkExistingUser = () => {
-    let currentUser = gapi.auth2.getAuthInstance().currentUser.get();
-    if (currentUser.Ea === null) {
-        return false;
-    }
-    return true;
 };
 
 export { prepLogin, auth2 };

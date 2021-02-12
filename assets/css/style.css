@@ -290,3 +290,53 @@ body {
     background-color: #4654a3;
     border-radius: 100%;
 }
+
+/* Back Icon */
+.back-icon {
+    position: fixed;
+    left: 20px;
+    top: 30px;
+}
+
+.back-icon > box-icon {
+    padding: 5px;
+    background-color: #d8deff;
+    border-radius: 100%;
+}
+
+/* Title */
+.title-page {
+    font-family: "Nunito", sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    display: block;
+    text-align: center;
+    margin-top: 38px;
+}
+
+/* Profile */
+.profile-detail {
+    display: flex;
+    align-items: center;
+    margin: 40px 0;
+    justify-content: center;
+}
+
+#profile-ava {
+    width: 72px;
+}
+
+#profile-nick {
+    font-family: "Nunito", sans-serif;
+    font-weight: 700;
+    font-size: 25px;
+    margin: 5px 10px;
+}
+
+#profile-mail {
+    font-family: "Nunito", sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    margin-left: 10px;
+    margin-top: 5px;
+}

@@ -8,7 +8,7 @@ const loadPage = (page) => {
             let content = document.querySelector(".content");
             if (xhttp.status === 200) {
                 content.innerHTML = xhttp.responseText;
-                setTimeout(() => (document.querySelector(".content").style.opacity = 1), 300);
+                document.querySelector(".content").style.opacity = 1;
                 // if (page === "login" || page === "dashboard") {
 
                 // }
@@ -24,10 +24,10 @@ const loadPage = (page) => {
 };
 
 const routePage = () => {
+    document.querySelector(".content").style.opacity = 0;
     let page = window.location.hash.substr(1);
     if (page == "") page = "login";
-    document.querySelector(".content").style.opacity = 0;
-    loadPage(page);
+    setTimeout(() => loadPage(page), 300);
 };
 
 export { routePage };
