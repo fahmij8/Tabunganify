@@ -2,7 +2,7 @@ import { routePage } from "./app-load-content.js";
 import { fillTopElement, onClickNav } from "./app-pages-dashboard.js";
 import { destroySplashScreen } from "./app-component-preloader.js";
 import { backHandler } from "./app-component-back.js";
-import { fillProfileElement } from "./app-pages-profile.js";
+import { fillProfileElement, onClickMenu } from "./app-pages-profile.js";
 
 let auth2 = gapi.auth2.init({
     client_id: "34406752556-4o4ekkabd87m3711gi3r14sv19or5rdm.apps.googleusercontent.com",
@@ -48,10 +48,33 @@ const onSignIn = (googleUser) => {
     } else if (location === "profil") {
         backHandler();
         fillProfileElement(googleUser);
+        onClickMenu();
         destroySplashScreen();
     } else {
         // Tambah page
+        backHandler();
         destroySplashScreen();
+        // Select init
+        let select = document.querySelectorAll("select");
+        M.FormSelect.init(select);
+        // Chips init
+        let chips = document.querySelectorAll(".chips");
+        M.Chips.init(chips, {
+            autocompleteOptions: {
+                data: {
+                    Apple: null,
+                    Microsoft: null,
+                    Google: null,
+                },
+                limit: 1,
+            },
+            placeholder: "Kategori",
+            secondaryPlaceholder: " ",
+            limit: 1,
+        });
+        //  Picker init
+        let datePicker = document.querySelectorAll(".datepicker");
+        M.Datepicker.init(datePicker);
     }
 };
 
@@ -62,8 +85,9 @@ const onSignInError = (error) => {
 const signOut = () => {
     auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(() => {
-        console.log("User signed out.");
+        window.location.href = "./";
+        routePage();
     });
 };
 
-export { prepLogin, auth2 };
+export { prepLogin, auth2, signOut };

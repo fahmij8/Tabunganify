@@ -1,1 +1,43 @@
-<h1>Hai</h1>
+<div class="add-banner">
+    <div class="back-icon back-add">
+        <box-icon name="chevron-left" color="#4654A3" size="lg"></box-icon>
+    </div>
+    <h1 class="title-page title-add">Pencatat Keuangan</h1>
+</div>
+
+<div id="add-form">
+    <div class="container">
+        <div class="col s12">
+            <div class="card">
+                <div class="container">
+                    <div class="row">
+                        <div class="input-field col s12 add-topform">
+                            <input id="name" type="text" class="validate" />
+                            <label for="name">Nama Transaksi</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input id="amount" type="number" class="validate" />
+                            <label for="amount">Jumlah Transaksi (Rp.)</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <select id="kind">
+                                <option value="" disabled selected>Jenis Transaksi</option>
+                                <option value="1">Pemasukan</option>
+                                <option value="2">Pengeluaran</option>
+                            </select>
+                        </div>
+                        <div class="col s12">
+                            <label for="chips">Kategori (Masukkan 1 saja)</label>
+                            <div class="chips chips-autocomplete chips-placeholder" id="category"></div>
+                        </div>
+                        <div class="input-field col s12">
+                            <input type="text" class="datepicker" id="date" />
+                            <label for="date">Tanggal</label>
+                        </div>
+                        <a class="waves-effect waves-light btn indigo darken-1 right add-bottomform">Simpan!</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -13,6 +13,7 @@ const fillTopElement = (googleUser) => {
 };
 
 const onClickNav = () => {
+    onClickAdd();
     document.querySelectorAll("body > div > div.dash-bottom > div.dash-navbar a").forEach((link) => {
         link.onclick = () => {
             let linklen = link.href.split("/");
@@ -20,6 +21,13 @@ const onClickNav = () => {
             routePage();
         };
     });
+};
+
+const onClickAdd = () => {
+    document.querySelector(".dash-fab").onclick = () => {
+        window.location.href = "./#tambah";
+        routePage();
+    };
 };
 
 export { fillTopElement, onClickNav };

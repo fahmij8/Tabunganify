@@ -1,3 +1,5 @@
+import { signOut } from "./app-google-connect.js";
+
 const fillProfileElement = (googleUser) => {
     let userAvatar = googleUser.getBasicProfile().getImageUrl();
     let userNickname = googleUser.getBasicProfile().getName();
@@ -13,4 +15,22 @@ const fillProfileElement = (googleUser) => {
     userMailElement.innerHTML = `${userMail}`;
 };
 
-export { fillProfileElement };
+const onClickMenu = () => {
+    document.querySelector("#delete-data").onclick = () => {
+        console.log("Soon!1");
+    };
+    document.querySelector("#download-data").onclick = () => {
+        console.log("Soon!2");
+    };
+    document.querySelector("#upload-data").onclick = () => {
+        console.log("Soon!3");
+    };
+    document.querySelector("#info-app").onclick = () => {
+        console.log("Soon!4");
+    };
+    document.querySelector("#log-out").onclick = () => {
+        signOut();
+    };
+};
+
+export { fillProfileElement, onClickMenu };
