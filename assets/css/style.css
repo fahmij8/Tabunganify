@@ -286,9 +286,14 @@ body {
     position: fixed;
     bottom: 85px;
     right: 35px;
-    padding: 7px;
+    padding: 7px 7px 3px 7px;
     background-color: #4654a3;
     border-radius: 100%;
+}
+
+.dash-transaction {
+    font-size: 20px;
+    font-weight: 400;
 }
 
 /* Back Icon */
@@ -395,6 +400,7 @@ body {
 
 .add-topform {
     margin-top: 30px;
+    margin-bottom: 0px;
 }
 
 .add-bottomform {

@@ -3,6 +3,7 @@ import { fillTopElement, onClickNav } from "./app-pages-dashboard.js";
 import { destroySplashScreen } from "./app-component-preloader.js";
 import { backHandler } from "./app-component-back.js";
 import { fillProfileElement, onClickMenu } from "./app-pages-profile.js";
+import { materializeInit, formEventHandler } from "./app-pages-add.js";
 
 let auth2 = gapi.auth2.init({
     client_id: "34406752556-4o4ekkabd87m3711gi3r14sv19or5rdm.apps.googleusercontent.com",
@@ -31,6 +32,13 @@ let prepLogin = () => {
 };
 
 const onSignIn = (googleUser) => {
+    // Local Storage Creation
+    let mail = googleUser.getBasicProfile().getEmail();
+    if (localStorage.getItem(mail) === null) {
+        localStorage.setItem(mail, JSON.stringify({}));
+    }
+
+    // Page Utilities
     let location = window.location.hash.substr(1);
     if (location === "") {
         window.location.href = "./#dashboard";
@@ -54,27 +62,8 @@ const onSignIn = (googleUser) => {
         // Tambah page
         backHandler();
         destroySplashScreen();
-        // Select init
-        let select = document.querySelectorAll("select");
-        M.FormSelect.init(select);
-        // Chips init
-        let chips = document.querySelectorAll(".chips");
-        M.Chips.init(chips, {
-            autocompleteOptions: {
-                data: {
-                    Apple: null,
-                    Microsoft: null,
-                    Google: null,
-                },
-                limit: 1,
-            },
-            placeholder: "Kategori",
-            secondaryPlaceholder: " ",
-            limit: 1,
-        });
-        //  Picker init
-        let datePicker = document.querySelectorAll(".datepicker");
-        M.Datepicker.init(datePicker);
+        materializeInit();
+        formEventHandler(mail);
     }
 };
 
