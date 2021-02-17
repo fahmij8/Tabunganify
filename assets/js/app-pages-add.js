@@ -1,3 +1,4 @@
+import { routePage } from "./app-load-content.js";
 const materializeInit = () => {
     let select = document.querySelectorAll("select");
     M.FormSelect.init(select);
@@ -22,6 +23,12 @@ const materializeInit = () => {
         format: "dd mmmm yyyy",
         defaultDate: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()),
         setDefaultDate: true,
+        i18n: {
+            cancel: "Batal",
+            clear: "Hapus",
+            done: "Pilih",
+            months: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
+        },
     });
 };
 
@@ -82,18 +89,50 @@ const formEventHandler = (mail) => {
             }
             if (data[year][month][day] === undefined) {
                 data[year][month][day] = {};
+                if (elementKind.value == 1) {
+                    createDetailedData("Pemasukan", exactTime, day, month, year, data, elementName, elementAmount, elementCategory);
+                } else {
+                    createDetailedData("Pengeluaran", exactTime, day, month, year, data, elementName, elementAmount, elementCategory);
+                }
             } else {
-                if (elementKind == 1) {
-                    if (data[year][month][day]["Pemasukan"] === undefined) {
-                        data[year][month][day]["Pemasukan"] = {};
-                    } else {
-                        data[year][month][day]["Pemasukan"][exactTime] = {};
-                    }
+                if (elementKind.value == 1) {
+                    createDetailedData("Pemasukan", exactTime, day, month, year, data, elementName, elementAmount, elementCategory);
+                } else {
+                    createDetailedData("Pengeluaran", exactTime, day, month, year, data, elementName, elementAmount, elementCategory);
                 }
             }
-            localStorage.setItem(mail, JSON.stringify(data));
+            let errorCatch = "";
+            try {
+                localStorage.setItem(mail, JSON.stringify(data));
+            } catch (error) {
+                errorCatch = error;
+                Swal.fire("Data gagal tersimpan", `${error}\nSilahkan hubungi pengembang untuk melaporkan masalah ini`, "error");
+            } finally {
+                if (errorCatch === "") {
+                    Swal.fire("Data berhasil tersimpan", "Mengalihkan ke dashboard", "success");
+                    setTimeout(() => {
+                        window.location.href = "./#dashboard";
+                        routePage();
+                    }, 1000);
+                }
+            }
         }
     });
+};
+
+let createDetailedData = (type, exactTime, day, month, year, data, elementName, elementAmount, elementCategory) => {
+    if (data[year][month][day][type] === undefined) {
+        data[year][month][day][type] = {};
+        data[year][month][day][type][exactTime] = {};
+        data[year][month][day][type][exactTime]["name"] = elementName.value;
+        data[year][month][day][type][exactTime]["amount"] = elementAmount.value;
+        data[year][month][day][type][exactTime]["category"] = elementCategory.M_Chips.chipsData[0].tag;
+    } else {
+        data[year][month][day][type][exactTime] = {};
+        data[year][month][day][type][exactTime]["name"] = elementName.value;
+        data[year][month][day][type][exactTime]["amount"] = elementAmount.value;
+        data[year][month][day][type][exactTime]["category"] = elementCategory.M_Chips.chipsData[0].tag;
+    }
 };
 
 let integerToCurrency = (value, element = null) => {
