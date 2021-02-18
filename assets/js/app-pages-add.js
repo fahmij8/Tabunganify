@@ -78,11 +78,15 @@ const formEventHandler = (mail) => {
             }, 5000);
         }
         if (elementCategory.M_Chips.chipsData.length == 0) {
-            countInvalid += 1;
-            document.querySelector(".red-text").classList.remove("hide");
-            setTimeout(() => {
-                document.querySelector(".red-text").classList.add("hide");
-            }, 5000);
+            if (document.querySelector("#category > input").value === "") {
+                countInvalid += 1;
+                document.querySelector(".red-text").classList.remove("hide");
+                setTimeout(() => {
+                    document.querySelector(".red-text").classList.add("hide");
+                }, 5000);
+            }
+            document.querySelector("#category").M_Chips.addChip({ tag: document.querySelector("#category > input").value });
+            document.querySelector("#category > input").value = "";
         }
         if (elementDate.value === "") {
             countInvalid += 1;
