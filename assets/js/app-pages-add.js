@@ -54,6 +54,7 @@ const formEventHandler = (mail) => {
     let elementCategory = document.querySelector("#category");
     let elementDate = document.querySelector("#date");
     let buttonChecker = document.querySelector("#submit");
+    document.querySelector("#category > input").inputMode = "text";
     // Currency conversion
     elementAmount.addEventListener("keyup", () => {
         integerToCurrency(elementAmount.value, elementAmount);
