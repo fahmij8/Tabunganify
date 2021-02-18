@@ -10,36 +10,38 @@
         <div class="col s12">
             <div class="card">
                 <div class="container">
-                    <div class="row">
-                        <div class="input-field col s12 add-topform">
-                            <input id="name" type="text" class="validate" />
-                            <label for="name">Nama Transaksi</label>
-                            <span class="helper-text" data-error="Nama transaksi belum di isi"></span>
+                    <form autocomplete="off">
+                        <div class="row">
+                            <div class="input-field col s12 add-topform">
+                                <input id="name" type="text" class="validate" autocomplete="off" />
+                                <label for="name">Nama Transaksi</label>
+                                <span class="helper-text" data-error="Nama transaksi belum di isi"></span>
+                            </div>
+                            <div class="input-field col s12">
+                                <input id="amount" type="text" class="validate" inputmode="numeric" autocomplete="off" />
+                                <label for="amount">Jumlah Transaksi (Rp.)</label>
+                                <span class="helper-text" data-error="Jumlah transaksi belum di isi"></span>
+                            </div>
+                            <div class="col s12">
+                                <select id="kind">
+                                    <option value="" disabled selected>Jenis Transaksi</option>
+                                    <option value="1">Pemasukan</option>
+                                    <option value="2">Pengeluaran</option>
+                                </select>
+                                <span class="helper-text" data-error="Kategori belum dipilih"></span>
+                            </div>
+                            <div class="input-field col s12">
+                                <div class="chips chips-autocomplete chips-placeholder" id="category"></div>
+                                <span class="helper-text red-text hide">Kategori belum di isi, Jangan lupa tekan enter jika selesai</span>
+                            </div>
+                            <div class="input-field col s12">
+                                <input type="text" class="datepicker validate" id="date" />
+                                <label for="date">Tanggal</label>
+                                <span class="helper-text" data-error="Tanggal belum di isi"></span>
+                            </div>
+                            <a class="waves-effect waves-light btn indigo darken-1 right add-bottomform" id="submit">Simpan!</a>
                         </div>
-                        <div class="input-field col s12">
-                            <input id="amount" type="text" class="validate" inputmode="numeric" />
-                            <label for="amount">Jumlah Transaksi (Rp.)</label>
-                            <span class="helper-text" data-error="Jumlah transaksi belum di isi"></span>
-                        </div>
-                        <div class="col s12">
-                            <select id="kind">
-                                <option value="" disabled selected>Jenis Transaksi</option>
-                                <option value="1">Pemasukan</option>
-                                <option value="2">Pengeluaran</option>
-                            </select>
-                            <span class="helper-text" data-error="Kategori belum dipilih"></span>
-                        </div>
-                        <div class="input-field col s12">
-                            <div class="chips chips-autocomplete chips-placeholder" id="category"></div>
-                            <span class="helper-text red-text hide">Kategori belum di isi, Jangan lupa tekan enter jika selesai</span>
-                        </div>
-                        <div class="input-field col s12">
-                            <input type="text" class="datepicker validate" id="date" />
-                            <label for="date">Tanggal</label>
-                            <span class="helper-text" data-error="Tanggal belum di isi"></span>
-                        </div>
-                        <a class="waves-effect waves-light btn indigo darken-1 right add-bottomform" id="submit">Simpan!</a>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

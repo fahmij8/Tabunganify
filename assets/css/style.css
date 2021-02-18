@@ -296,6 +296,42 @@ body {
     font-weight: 400;
 }
 
+.transaction-list {
+    margin-bottom: 65px;
+}
+
+.transaction-empty {
+    display: block;
+    text-align: center;
+    margin: 0 auto 80px 0;
+}
+
+.transaction-empty img {
+    width: 250px;
+    display: block;
+    margin: 30px auto;
+}
+
+.transaction-amount {
+    font-size: 17px;
+    text-align: right;
+    min-width: 125px;
+}
+
+.transaction-name {
+    font-size: 17px;
+    font-weight: 500;
+    margin-left: 10px;
+    margin-bottom: 5px;
+    word-break: break-word;
+}
+
+.transaction-date {
+    font-size: 13px;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
 /* Back Icon */
 .back-icon {
     position: fixed;
@@ -358,7 +394,7 @@ body {
     line-height: 0;
     margin: 0 15px;
     line-height: 130%;
-    font-weight: 500;
+    font-weight: 400;
 }
 
 /* Add page */

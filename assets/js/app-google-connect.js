@@ -1,5 +1,5 @@
 import { routePage } from "./app-load-content.js";
-import { fillTopElement, onClickNav } from "./app-pages-dashboard.js";
+import { fillTopElement, onClickNav, showListTransaction } from "./app-pages-dashboard.js";
 import { destroySplashScreen } from "./app-component-preloader.js";
 import { backHandler } from "./app-component-back.js";
 import { fillProfileElement, onClickMenu } from "./app-pages-profile.js";
@@ -47,6 +47,7 @@ const onSignIn = (googleUser) => {
         fillTopElement(googleUser);
         onClickNav();
         destroySplashScreen();
+        showListTransaction(mail);
     } else if (location === "rekapitulasi") {
         backHandler();
         destroySplashScreen();
@@ -62,7 +63,7 @@ const onSignIn = (googleUser) => {
         // Tambah page
         backHandler();
         destroySplashScreen();
-        materializeInit();
+        materializeInit(mail);
         formEventHandler(mail);
     }
 };

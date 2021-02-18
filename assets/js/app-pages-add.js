@@ -1,16 +1,31 @@
 import { routePage } from "./app-load-content.js";
-const materializeInit = () => {
+const materializeInit = (mail) => {
     let select = document.querySelectorAll("select");
     M.FormSelect.init(select);
+    // Category Init
+    let data = JSON.parse(localStorage.getItem(mail));
+    let listCategory = {};
+    if (data[new Date().getFullYear().toString()] !== undefined) {
+        Object.values(data).forEach((month) => {
+            Object.values(month).forEach((day) => {
+                Object.values(day).forEach((kind) => {
+                    Object.values(kind).forEach((time) => {
+                        Object.values(time).forEach((detail) => {
+                            if (listCategory[detail.category] === undefined) {
+                                listCategory[detail.category] = null;
+                            }
+                        });
+                    });
+                });
+            });
+        });
+    }
+
     // Chips init
     let chips = document.querySelectorAll(".chips");
     M.Chips.init(chips, {
         autocompleteOptions: {
-            data: {
-                Apple: null,
-                Microsoft: null,
-                Google: null,
-            },
+            data: listCategory,
             limit: 1,
         },
         placeholder: "Kategori",
@@ -76,10 +91,9 @@ const formEventHandler = (mail) => {
         if (countInvalid === 0) {
             let dateSet = elementDate.value.split(" ");
             let year = dateSet[2];
-            let month = dateSet[1];
+            let month = new Date(Date.parse(dateSet[1] + " 1, 2012")).getMonth() + 1;
             let day = dateSet[0];
             let exactTime = new Date().getTime();
-
             let data = JSON.parse(localStorage.getItem(mail));
             if (data[year] === undefined) {
                 data[year] = {};
@@ -109,7 +123,22 @@ const formEventHandler = (mail) => {
                 Swal.fire("Data gagal tersimpan", `${error}\nSilahkan hubungi pengembang untuk melaporkan masalah ini`, "error");
             } finally {
                 if (errorCatch === "") {
-                    Swal.fire("Data berhasil tersimpan", "Mengalihkan ke dashboard", "success");
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener("mouseenter", Swal.stopTimer);
+                            toast.addEventListener("mouseleave", Swal.resumeTimer);
+                        },
+                    });
+
+                    Toast.fire({
+                        icon: "success",
+                        title: "Data telah ditambahkan",
+                    });
                     setTimeout(() => {
                         window.location.href = "./#dashboard";
                         routePage();
