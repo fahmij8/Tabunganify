@@ -1,5 +1,6 @@
 import { signOut } from "./app-google-connect.js";
 import { localStorageCreation } from "./app-data.js";
+import { getData } from "./app-data.js";
 
 const fillProfileElement = (googleUser) => {
     let userAvatar = googleUser.getBasicProfile().getImageUrl();
@@ -92,9 +93,17 @@ const onClickMenu = (googleUser) => {
                             try {
                                 localStorage.setItem("secret", secretKey);
                                 localStorage.setItem(mail, event.target.result);
+                                getData(googleUser.getBasicProfile().getEmail());
                             } catch (error) {
                                 errorCatch = error;
-                                Swal.fire("Data gagal di unggah", `${error}\nSilahkan hubungi pengembang untuk melaporkan masalah ini`, "error");
+                                console.log(error);
+                                if (error.message === "Malformed UTF-8 data") {
+                                    localStorageCreation(googleUser, "remove");
+                                    Swal.fire("Data gagal di unggah", `${error}\nNampaknya kamu salah memasukkan secret key. Silahkan dilihat kembali di device sebelumnya`, "error");
+                                } else {
+                                    localStorageCreation(googleUser, "remove");
+                                    Swal.fire("Data gagal di unggah", `${error}\nSilahkan hubungi pengembang untuk melaporkan masalah ini`, "error");
+                                }
                             } finally {
                                 if (errorCatch === "") {
                                     Swal.fire("Data berhasil di unggah", "", "success");
@@ -143,7 +152,7 @@ const onClickMenu = (googleUser) => {
                                 <a class="btn-floating halfway-fab waves-effect waves-light red" href="https://www.instagram.com/byedadah00/" target="_blank"><i class="material-icons">favorite_border</i></a>
                             </div>
                             <div class="card-content">
-                                <p>Anggota 1. Bentar ya ditanyain dulu.</p>
+                                <p>Anggota 1. Math Lover.</p>
                                 <p style="font-size: 12px;margin-top: 5px;font-weight: 700;">Universitas Pendidikan Indonesia</p>
                             </div>
                         </div>
@@ -161,7 +170,7 @@ const onClickMenu = (googleUser) => {
                                 <a class="btn-floating halfway-fab waves-effect waves-light red" href="https://www.instagram.com/frwyash/" target="_blank"><i class="material-icons">favorite_border</i></a>
                             </div>
                             <div class="card-content">
-                                <p>Anggota 2. Bentar ya ditanyain dulu.</p>
+                                <p>Anggota 2. Cat Lover.</p>
                                 <p style="font-size: 12px;margin-top: 5px;font-weight: 700;">Universitas Pendidikan Indonesia</p>
                             </div>
                         </div>

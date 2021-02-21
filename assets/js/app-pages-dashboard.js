@@ -24,16 +24,19 @@ const fillTopElement = (googleUser) => {
     let totalBalance = 0;
     if (data[new Date().getFullYear().toString()] !== undefined) {
         Object.values(data).forEach((month) => {
-            Object.values(month).forEach((day) => {
-                Object.values(day).forEach((kind) => {
+            Object.entries(month).forEach((day) => {
+                let currentMonth = parseInt(day[0]);
+                Object.values(day[1]).forEach((kind) => {
                     Object.entries(kind).forEach((time) => {
                         kinds = time[0];
                         Object.values(time[1]).forEach((detail) => {
                             let amount = currencyToInteger(detail.amount);
-                            if (kinds === "Pemasukan") {
-                                totalIncome += amount;
-                            } else {
-                                totalOutcome += amount;
+                            if (currentMonth === new Date().getMonth() + 1) {
+                                if (kinds === "Pemasukan") {
+                                    totalIncome += amount;
+                                } else {
+                                    totalOutcome += amount;
+                                }
                             }
                         });
                     });
@@ -111,14 +114,26 @@ const showListTransaction = (mail) => {
                                                     amount = "-" + timeAndData[1].amount;
                                                     color = "red";
                                                     icon = "<i class='bx bx-basket'></i>";
-                                                    if (timeAndData[1].category.toUpperCase() === "MEDIS" || timeAndData[1].category.toUpperCase() === "OBAT") {
+                                                    if (
+                                                        timeAndData[1].category.toUpperCase() === "MEDIS" ||
+                                                        timeAndData[1].category.toUpperCase() === "OBAT" ||
+                                                        timeAndData[1].category.toUpperCase() === "BEROBAT"
+                                                    ) {
                                                         icon = "<i class='bx bx-plus-medical' ></i>";
-                                                    } else if (timeAndData[1].category.toUpperCase() === "BELANJA") {
+                                                    } else if (timeAndData[1].category.toUpperCase() === "BELANJA" || timeAndData[1].category.toUpperCase() === "JAJAN") {
                                                         icon = "<i class='bx bx-basket'></i>";
-                                                    } else if (timeAndData[1].category.toUpperCase() === "MAKANAN") {
+                                                    } else if (timeAndData[1].category.toUpperCase() === "MAKANAN" || timeAndData[1].category.toUpperCase() === "MAKAN") {
                                                         icon = "<i class='bx bx-dish'></i>";
-                                                    } else if (timeAndData[1].category.toUpperCase() === "TAGIHAN" || timeAndData[1].category.toUpperCase() === "HUTANG") {
+                                                    } else if (timeAndData[1].category.toUpperCase() === "MINUMAN" || timeAndData[1].category.toUpperCase() === "NGOPI") {
+                                                        icon = "<i class='bx bxs-coffee'></i>";
+                                                    } else if (
+                                                        timeAndData[1].category.toUpperCase() === "TAGIHAN" ||
+                                                        timeAndData[1].category.toUpperCase() === "HUTANG" ||
+                                                        timeAndData[1].category.toUpperCase() === "CICILAN"
+                                                    ) {
                                                         icon = "<i class='bx bxs-shopping-bags'></i>";
+                                                    } else if (timeAndData[1].category.toUpperCase() === "ASURANSI") {
+                                                        icon = "<i class='bx bx-shield-quarter'></i>";
                                                     }
                                                 } else {
                                                     amount = timeAndData[1].amount;

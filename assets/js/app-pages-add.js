@@ -37,9 +37,10 @@ const materializeInit = (mail) => {
     //  Picker init
     let datePicker = document.querySelectorAll(".datepicker");
     M.Datepicker.init(datePicker, {
-        format: "dd mmmm yyyy",
+        format: "d mmmm yyyy",
         defaultDate: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()),
         setDefaultDate: true,
+        minDate: new Date(new Date().getFullYear(), 0, 1),
         i18n: {
             cancel: "Batal",
             clear: "Hapus",

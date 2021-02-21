@@ -50,7 +50,7 @@ const onSignIn = (googleUser) => {
     } else if (location === "rekapitulasi") {
         backHandler();
         destroySplashScreen();
-        graphInitiate();
+        graphInitiate(mail);
     } else if (location === "analisis") {
         backHandler();
         destroySplashScreen();
