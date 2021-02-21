@@ -4,6 +4,8 @@ import { destroySplashScreen } from "./app-component-preloader.js";
 import { backHandler } from "./app-component-back.js";
 import { fillProfileElement, onClickMenu } from "./app-pages-profile.js";
 import { materializeInit, formEventHandler } from "./app-pages-add.js";
+import { localStorageCreation } from "./app-data.js";
+import { graphInitiate } from "./app-pages-recap.js";
 
 let auth2 = gapi.auth2.init({
     client_id: "34406752556-4o4ekkabd87m3711gi3r14sv19or5rdm.apps.googleusercontent.com",
@@ -34,10 +36,7 @@ let prepLogin = () => {
 const onSignIn = (googleUser) => {
     // Local Storage Creation
     let mail = googleUser.getBasicProfile().getEmail();
-    if (localStorage.getItem(mail) === null) {
-        localStorage.setItem(mail, JSON.stringify({}));
-    }
-
+    localStorageCreation(googleUser, "first");
     // Page Utilities
     let location = window.location.hash.substr(1);
     if (location === "") {
@@ -51,13 +50,14 @@ const onSignIn = (googleUser) => {
     } else if (location === "rekapitulasi") {
         backHandler();
         destroySplashScreen();
+        graphInitiate();
     } else if (location === "analisis") {
         backHandler();
         destroySplashScreen();
     } else if (location === "profil") {
         backHandler();
         fillProfileElement(googleUser);
-        onClickMenu();
+        onClickMenu(googleUser);
         destroySplashScreen();
     } else {
         // Tambah page

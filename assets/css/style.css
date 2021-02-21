@@ -310,6 +310,7 @@ body {
     width: 250px;
     display: block;
     margin: 30px auto;
+    opacity: 0.5;
 }
 
 .transaction-amount {
@@ -334,7 +335,7 @@ body {
 
 /* Back Icon */
 .back-icon {
-    position: fixed;
+    position: absolute;
     left: 20px;
     top: 30px;
 }
@@ -454,6 +455,11 @@ body {
     box-shadow: 0 1px 0 0 #4654a3 !important;
 }
 
+input[type]:not(.browser-default):focus:not([readonly]) {
+    border-bottom: 1px solid #4654a3 !important;
+    box-shadow: 0 1px 0 0 #4654a3 !important;
+}
+
 .chips.focus {
     border-bottom: 1px solid #9e9e9e;
     box-shadow: 0 1px 0 0 #ffffff;
@@ -466,4 +472,10 @@ body {
 .dropdown-content li > a,
 .dropdown-content li > span {
     color: #4654a3;
+}
+
+/* Rekapitulasi */
+.recap-subtitle {
+    font-weight: 400;
+    font-size: 20px;
 }

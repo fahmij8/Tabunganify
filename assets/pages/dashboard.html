@@ -15,7 +15,7 @@
 <div class="dash-bottom">
     <div class="container">
         <h1 class="dash-saldo">Saldo Bulan Ini</h1>
-        <h2 class="dash-saldo-a">Rp. 0</h2>
+        <h2 class="dash-saldo-a" id="transactionBalance"></h2>
         <div class="row">
             <div class="col s6">
                 <div class="dash-box">
@@ -23,7 +23,7 @@
                         <box-icon type="solid" name="up-arrow-alt" color="#34A853"></box-icon>
                         <h1>Pendapatan</h1>
                     </div>
-                    <h2>Rp. 0</h2>
+                    <h2 id="transactionIn"></h2>
                 </div>
             </div>
             <div class="col s6">
@@ -32,7 +32,7 @@
                         <box-icon type="solid" name="up-arrow-alt" flip="vertical" color="#E43030"></box-icon>
                         <h1>Pengeluaran</h1>
                     </div>
-                    <h2>Rp. 0</h2>
+                    <h2 id="transactionOut"></h2>
                 </div>
             </div>
         </div>

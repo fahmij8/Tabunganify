@@ -1,4 +1,6 @@
 import { routePage } from "./app-load-content.js";
+import { getData } from "./app-data.js";
+import { currencyToInteger, integerToCurrency } from "./app-pages-add.js";
 
 const fillTopElement = (googleUser) => {
     let userAvatar = googleUser.getBasicProfile().getImageUrl();
@@ -10,6 +12,39 @@ const fillTopElement = (googleUser) => {
     let userNicknameElement = document.getElementById("user-nick");
     userAvatarElement.setAttribute("src", userAvatar);
     userNicknameElement.innerHTML = `${userNickname}`;
+
+    let totalIncomeElement = document.querySelector("#transactionIn");
+    let totalOutcomeElement = document.querySelector("#transactionOut");
+    let totalBalanceElement = document.querySelector("#transactionBalance");
+
+    let data = getData(googleUser.getBasicProfile().getEmail());
+    let kinds;
+    let totalIncome = 0;
+    let totalOutcome = 0;
+    let totalBalance = 0;
+    if (data[new Date().getFullYear().toString()] !== undefined) {
+        Object.values(data).forEach((month) => {
+            Object.values(month).forEach((day) => {
+                Object.values(day).forEach((kind) => {
+                    Object.entries(kind).forEach((time) => {
+                        kinds = time[0];
+                        Object.values(time[1]).forEach((detail) => {
+                            let amount = currencyToInteger(detail.amount);
+                            if (kinds === "Pemasukan") {
+                                totalIncome += amount;
+                            } else {
+                                totalOutcome += amount;
+                            }
+                        });
+                    });
+                });
+            });
+        });
+    }
+    totalBalance = totalIncome - totalOutcome;
+    totalIncome = integerToCurrency(totalIncome.toString(), totalIncomeElement);
+    totalOutcome = integerToCurrency(totalOutcome.toString(), totalOutcomeElement);
+    totalBalance = integerToCurrency(totalBalance.toString(), totalBalanceElement);
 };
 
 const onClickNav = () => {
@@ -31,7 +66,7 @@ const onClickAdd = () => {
 };
 
 const showListTransaction = (mail) => {
-    let data = JSON.parse(localStorage.getItem(mail));
+    let data = getData(mail);
     let transactionListElement = document.querySelector(".transaction-list");
     if (data[new Date().getFullYear().toString()] === undefined) {
         transactionListElement.innerHTML = `
@@ -76,12 +111,14 @@ const showListTransaction = (mail) => {
                                                     amount = "-" + timeAndData[1].amount;
                                                     color = "red";
                                                     icon = "<i class='bx bx-basket'></i>";
-                                                    if (timeAndData[1].category === "Medis" || timeAndData[1].category === "Obat") {
+                                                    if (timeAndData[1].category.toUpperCase() === "MEDIS" || timeAndData[1].category.toUpperCase() === "OBAT") {
                                                         icon = "<i class='bx bx-plus-medical' ></i>";
-                                                    } else if (timeAndData[1].category === "Belanja") {
-                                                        icon = "<i class='bx bxs-shopping-bags'></i>";
-                                                    } else if (timeAndData[1].category === "Makanan") {
+                                                    } else if (timeAndData[1].category.toUpperCase() === "BELANJA") {
+                                                        icon = "<i class='bx bx-basket'></i>";
+                                                    } else if (timeAndData[1].category.toUpperCase() === "MAKANAN") {
                                                         icon = "<i class='bx bx-dish'></i>";
+                                                    } else if (timeAndData[1].category.toUpperCase() === "TAGIHAN" || timeAndData[1].category.toUpperCase() === "HUTANG") {
+                                                        icon = "<i class='bx bxs-shopping-bags'></i>";
                                                     }
                                                 } else {
                                                     amount = timeAndData[1].amount;
@@ -94,7 +131,7 @@ const showListTransaction = (mail) => {
                                                                 <a class="btn-floating btn-medium waves-effect waves-light ${color}" style="min-width: 40px;">${icon}</a>
                                                                 <div>
                                                                     <h4 class="transaction-name">${timeAndData[1].name}</h4>
-                                                                    <p class="transaction-date">${actualDay} ${month[actualMonth]} ${actualYear}</p>
+                                                                    <p class="transaction-date">${actualDay} ${month[actualMonth - 1]} ${actualYear}</p>
                                                                 </div>
                                                             </td>
                                                             <td class="transaction-amount">${amount}</td>

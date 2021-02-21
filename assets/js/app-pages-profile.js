@@ -1,12 +1,10 @@
 import { signOut } from "./app-google-connect.js";
-
-let mail;
+import { localStorageCreation } from "./app-data.js";
 
 const fillProfileElement = (googleUser) => {
     let userAvatar = googleUser.getBasicProfile().getImageUrl();
     let userNickname = googleUser.getBasicProfile().getName();
     let userMail = googleUser.getBasicProfile().getEmail();
-    mail = userMail;
     if (userNickname.length > 12) {
         userNickname = googleUser.getBasicProfile().getGivenName();
     }
@@ -18,7 +16,8 @@ const fillProfileElement = (googleUser) => {
     userMailElement.innerHTML = `${userMail}`;
 };
 
-const onClickMenu = () => {
+const onClickMenu = (googleUser) => {
+    let mail = googleUser.getBasicProfile().getEmail();
     document.querySelector("#delete-data").onclick = () => {
         Swal.fire({
             title: "<strong>Apakah kamu yakin?</strong>",
@@ -32,8 +31,7 @@ const onClickMenu = () => {
             if (result.isConfirmed) {
                 let errorCatch = "";
                 try {
-                    localStorage.clear();
-                    localStorage.setItem(mail, JSON.stringify({}));
+                    localStorageCreation(googleUser, "remove");
                 } catch (error) {
                     errorCatch = error;
                     Swal.fire("Data gagal dihapus", `${error}\nSilahkan hubungi pengembang untuk melaporkan masalah ini`, "error");
@@ -49,7 +47,7 @@ const onClickMenu = () => {
         let errorCatch = "";
         try {
             let data = localStorage.getItem(mail);
-            let fileToSave = new Blob([JSON.stringify(data)], {
+            let fileToSave = new Blob([data], {
                 type: "application/json",
                 name: mail,
             });
@@ -59,7 +57,11 @@ const onClickMenu = () => {
             Swal.fire("Data gagal di unduh", `${error}\nSilahkan hubungi pengembang untuk melaporkan masalah ini`, "error");
         } finally {
             if (errorCatch === "") {
-                Swal.fire("Data berhasil di unduh", "Simpan data kamu baik-baik. Data tersebut dapat digunakan oleh kamu untuk penggunaan aplikasi di perangkat lain", "success");
+                Swal.fire(
+                    "Data berhasil di unduh",
+                    `Untuk menggunakan di perangkat lain, unggah data tadi di perangkat lain lalu masukkan secret key berikut ini <b>${localStorage.getItem("secret")}</b>`,
+                    "success"
+                );
             }
         }
     };
@@ -67,7 +69,7 @@ const onClickMenu = () => {
         if (data.target.files && data.target.files[0]) {
             let reader = new FileReader();
             reader.readAsText(data.target.files[0]);
-            reader.onload = function (event) {
+            reader.onload = async (event) => {
                 Swal.fire({
                     title: "<strong>Apakah kamu yakin?</strong>",
                     html: "Operasi menimpa data yang sudah ada (bila ada)",
@@ -76,17 +78,27 @@ const onClickMenu = () => {
                     focusConfirm: false,
                     confirmButtonText: "Ya",
                     cancelButtonText: "Tidak sekarang",
-                }).then((result) => {
+                }).then(async (result) => {
                     if (result.isConfirmed) {
-                        let errorCatch = "";
-                        try {
-                            localStorage.setItem(mail, JSON.parse(event.target.result));
-                        } catch (error) {
-                            errorCatch = error;
-                            Swal.fire("Data gagal di unggah", `${error}\nSilahkan hubungi pengembang untuk melaporkan masalah ini`, "error");
-                        } finally {
-                            if (errorCatch === "") {
-                                Swal.fire("Data berhasil di unggah", "", "success");
+                        const { value: secretKey } = await Swal.fire({
+                            title: "Masukkan Secret Key",
+                            input: "text",
+                            inputLabel: "Secret key didapatkan saat anda mengunduh data di perangkat sebelumnya",
+                            inputPlaceholder: "Masukkan Secret Key",
+                        });
+
+                        if (secretKey) {
+                            let errorCatch = "";
+                            try {
+                                localStorage.setItem("secret", secretKey);
+                                localStorage.setItem(mail, event.target.result);
+                            } catch (error) {
+                                errorCatch = error;
+                                Swal.fire("Data gagal di unggah", `${error}\nSilahkan hubungi pengembang untuk melaporkan masalah ini`, "error");
+                            } finally {
+                                if (errorCatch === "") {
+                                    Swal.fire("Data berhasil di unggah", "", "success");
+                                }
                             }
                         }
                     }

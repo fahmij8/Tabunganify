@@ -1,9 +1,11 @@
 import { routePage } from "./app-load-content.js";
+import { insertData, getData } from "./app-data.js";
+
 const materializeInit = (mail) => {
     let select = document.querySelectorAll("select");
     M.FormSelect.init(select);
     // Category Init
-    let data = JSON.parse(localStorage.getItem(mail));
+    let data = getData(mail);
     let listCategory = {};
     if (data[new Date().getFullYear().toString()] !== undefined) {
         Object.values(data).forEach((month) => {
@@ -99,7 +101,7 @@ const formEventHandler = (mail) => {
             let month = new Date(Date.parse(dateSet[1] + " 1, 2012")).getMonth() + 1;
             let day = dateSet[0];
             let exactTime = new Date().getTime();
-            let data = JSON.parse(localStorage.getItem(mail));
+            let data = getData(mail);
             if (data[year] === undefined) {
                 data[year] = {};
             }
@@ -122,7 +124,7 @@ const formEventHandler = (mail) => {
             }
             let errorCatch = "";
             try {
-                localStorage.setItem(mail, JSON.stringify(data));
+                insertData(mail, data);
             } catch (error) {
                 errorCatch = error;
                 Swal.fire("Data gagal tersimpan", `${error}\nSilahkan hubungi pengembang untuk melaporkan masalah ini`, "error");
@@ -183,9 +185,13 @@ let integerToCurrency = (value, element = null) => {
 
     rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
     if (element !== null) {
-        element.value = "Rp. " + rupiah;
+        if (element.value !== undefined) {
+            element.value = "Rp. " + rupiah;
+        } else {
+            element.innerHTML = "Rp. " + rupiah;
+        }
     }
-    return;
+    return rupiah;
 };
 
 let currencyToInteger = (value) => {
@@ -195,9 +201,9 @@ let currencyToInteger = (value) => {
         toRemove.forEach((element) => {
             currency = currency.split(element).join("");
         });
-        return currency;
+        return parseInt(currency);
     }
     return;
 };
 
-export { materializeInit, formEventHandler };
+export { materializeInit, formEventHandler, currencyToInteger, integerToCurrency };
