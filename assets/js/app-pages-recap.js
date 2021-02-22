@@ -49,17 +49,20 @@ let graphInitiate = (mail) => {
                 {
                     gridLines: {
                         drawBorder: false,
-                        display: false,
+                        display: true,
+                        borderDash: [13, 5],
                     },
                     ticks: {
                         display: false,
+                        suggestedMin: 50,
+                        suggestedMax: 100,
                     },
                 },
             ],
             xAxes: [
                 {
                     gridLines: {
-                        drawBorder: false,
+                        drawBorder: true,
                         display: false,
                     },
                 },
@@ -140,6 +143,8 @@ let graphInitiate = (mail) => {
                             backgroundColor: gradientBalance,
                             borderColor: "rgb(3, 70, 242)",
                             data: shownBalance,
+                            pointRadius: 5,
+                            pointHoverRadius: 5,
                         },
                     ],
                 },
@@ -155,6 +160,8 @@ let graphInitiate = (mail) => {
                             backgroundColor: gradientBalance,
                             borderColor: "rgb(3, 70, 242)",
                             data: shownIncome,
+                            pointRadius: 5,
+                            pointHoverRadius: 5,
                         },
                     ],
                 },
@@ -170,6 +177,8 @@ let graphInitiate = (mail) => {
                             backgroundColor: gradientBalance,
                             borderColor: "rgb(3, 70, 242)",
                             data: shownOutcome,
+                            pointRadius: 5,
+                            pointHoverRadius: 5,
                         },
                     ],
                 },
