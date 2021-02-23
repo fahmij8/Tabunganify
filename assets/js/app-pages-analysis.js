@@ -311,7 +311,8 @@ let createModel = async (retrievedData, need) => {
         mae = history.history.mae[0];
         val_mae = history.history.val_mae[0];
         epoch -= 1;
-        document.querySelector("#progress").innerHTML = `${Math.ceil((epoch / 299) * 100)}%`;
+        document.querySelector("#progress").innerHTML = `${100 - Math.ceil((epoch / 299) * 100)}%`;
+        console.log(`${epoch} => ${mae} || ${val_mae}`);
     }
     let predictionResult = normalizedData.slice(-2);
     while (predictionResult[predictionResult.length - 1] >= 0) {
