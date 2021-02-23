@@ -6,6 +6,7 @@ import { fillProfileElement, onClickMenu } from "./app-pages-profile.js";
 import { materializeInit, formEventHandler } from "./app-pages-add.js";
 import { localStorageCreation } from "./app-data.js";
 import { graphInitiate } from "./app-pages-recap.js";
+import { predictionInitiate } from "./app-pages-analysis.js";
 
 let auth2 = gapi.auth2.init({
     client_id: "34406752556-4o4ekkabd87m3711gi3r14sv19or5rdm.apps.googleusercontent.com",
@@ -54,6 +55,7 @@ const onSignIn = (googleUser) => {
     } else if (location === "analisis") {
         backHandler();
         destroySplashScreen();
+        predictionInitiate(mail);
     } else if (location === "profil") {
         backHandler();
         fillProfileElement(googleUser);

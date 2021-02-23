@@ -217,37 +217,42 @@ const showListTransaction = (mail) => {
                                 });
                             },
                             onCloseEnd: () => {
-                                let errorCatch = "";
-                                try {
-                                    data[rows.getAttribute("data-year")][rows.getAttribute("data-month")][rows.getAttribute("data-day")][rows.getAttribute("data-kind")][
-                                        rows.getAttribute("data-time")
-                                    ].name = document.querySelector("#name").value;
-                                    data[rows.getAttribute("data-year")][rows.getAttribute("data-month")][rows.getAttribute("data-day")][rows.getAttribute("data-kind")][
-                                        rows.getAttribute("data-time")
-                                    ].amount = document.querySelector("#amount").value;
-                                    insertData(mail, data);
-                                } catch (error) {
-                                    errorCatch = error;
-                                    Swal.fire("Data gagal di hapus", `${error}\nSilahkan hubungi pengembang untuk melaporkan masalah ini`, "error");
-                                } finally {
-                                    if (errorCatch === "") {
-                                        const Toast = Swal.mixin({
-                                            toast: true,
-                                            position: "top-end",
-                                            showConfirmButton: false,
-                                            timer: 3000,
-                                            timerProgressBar: true,
-                                            didOpen: (toast) => {
-                                                toast.addEventListener("mouseenter", Swal.stopTimer);
-                                                toast.addEventListener("mouseleave", Swal.resumeTimer);
-                                            },
-                                        });
+                                if (document.querySelector("#name").value === "" || document.querySelector("#amount").value === "") {
+                                    M.Modal.getInstance(document.querySelector(".modal")).open();
+                                    console.log("here");
+                                } else {
+                                    let errorCatch = "";
+                                    try {
+                                        data[rows.getAttribute("data-year")][rows.getAttribute("data-month")][rows.getAttribute("data-day")][rows.getAttribute("data-kind")][
+                                            rows.getAttribute("data-time")
+                                        ].name = document.querySelector("#name").value;
+                                        data[rows.getAttribute("data-year")][rows.getAttribute("data-month")][rows.getAttribute("data-day")][rows.getAttribute("data-kind")][
+                                            rows.getAttribute("data-time")
+                                        ].amount = document.querySelector("#amount").value;
+                                        insertData(mail, data);
+                                    } catch (error) {
+                                        errorCatch = error;
+                                        Swal.fire("Data gagal di hapus", `${error}\nSilahkan hubungi pengembang untuk melaporkan masalah ini`, "error");
+                                    } finally {
+                                        if (errorCatch === "") {
+                                            const Toast = Swal.mixin({
+                                                toast: true,
+                                                position: "top-end",
+                                                showConfirmButton: false,
+                                                timer: 3000,
+                                                timerProgressBar: true,
+                                                didOpen: (toast) => {
+                                                    toast.addEventListener("mouseenter", Swal.stopTimer);
+                                                    toast.addEventListener("mouseleave", Swal.resumeTimer);
+                                                },
+                                            });
 
-                                        Toast.fire({
-                                            icon: "success",
-                                            title: "Data telah dirubah",
-                                        });
-                                        routePage();
+                                            Toast.fire({
+                                                icon: "success",
+                                                title: "Data telah dirubah",
+                                            });
+                                            routePage();
+                                        }
                                     }
                                 }
                             },
@@ -258,8 +263,18 @@ const showListTransaction = (mail) => {
                         let errorCatch = "";
                         try {
                             delete data[rows.getAttribute("data-year")][rows.getAttribute("data-month")][rows.getAttribute("data-day")][rows.getAttribute("data-kind")][rows.getAttribute("data-time")];
-                            delete data[rows.getAttribute("data-year")][rows.getAttribute("data-month")][rows.getAttribute("data-day")][rows.getAttribute("data-kind")];
-                            delete data[rows.getAttribute("data-year")][rows.getAttribute("data-month")][rows.getAttribute("data-day")];
+                            if (Object.entries(data[rows.getAttribute("data-year")][rows.getAttribute("data-month")][rows.getAttribute("data-day")][rows.getAttribute("data-kind")]).length === 0) {
+                                delete data[rows.getAttribute("data-year")][rows.getAttribute("data-month")][rows.getAttribute("data-day")][rows.getAttribute("data-kind")];
+                            }
+                            if (Object.entries(data[rows.getAttribute("data-year")][rows.getAttribute("data-month")][rows.getAttribute("data-day")]).length === 0) {
+                                delete data[rows.getAttribute("data-year")][rows.getAttribute("data-month")][rows.getAttribute("data-day")];
+                            }
+                            if (Object.entries(data[rows.getAttribute("data-year")][rows.getAttribute("data-month")]).length === 0) {
+                                delete data[rows.getAttribute("data-year")][rows.getAttribute("data-month")];
+                            }
+                            if (Object.entries(data[rows.getAttribute("data-year")]).length === 0) {
+                                delete data[rows.getAttribute("data-year")];
+                            }
                             insertData(mail, data);
                         } catch (error) {
                             errorCatch = error;

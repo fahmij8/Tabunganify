@@ -173,6 +173,14 @@ let createDetailedData = (type, exactTime, day, month, year, data, elementName, 
 };
 
 let integerToCurrency = (value, element = null) => {
+    value = parseInt(value);
+    let sign;
+    if (value < 0) {
+        sign = "-Rp. ";
+    } else {
+        sign = "Rp. ";
+    }
+    value = value.toString();
     let number_string = value.replace(/[^,\d]/g, "").toString(),
         split = number_string.split(","),
         sisa = split[0].length % 3,
@@ -187,9 +195,9 @@ let integerToCurrency = (value, element = null) => {
     rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
     if (element !== null) {
         if (element.value !== undefined) {
-            element.value = "Rp. " + rupiah;
+            element.value = sign + rupiah;
         } else {
-            element.innerHTML = "Rp. " + rupiah;
+            element.innerHTML = sign + rupiah;
         }
     }
     return rupiah;

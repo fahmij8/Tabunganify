@@ -490,3 +490,27 @@ input[type]:not(.browser-default):focus:not([readonly]) {
     font-weight: 400;
     font-size: 20px;
 }
+
+/* Analisis */
+.analyst-card {
+    background: linear-gradient(180deg, #e7e7ff 0%, #ffffff 100%);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 36px;
+}
+
+.analyst-card-title {
+    color: black;
+    font-size: 20px !important;
+}
+
+.analyst-extra {
+    font-size: 15px;
+    margin: 0px;
+}
+
+.analyst-extra-fill {
+    font-size: 15px;
+    margin: 0px;
+    text-align: right;
+    font-weight: 600;
+}

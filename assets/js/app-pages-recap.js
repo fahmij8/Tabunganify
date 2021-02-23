@@ -131,8 +131,7 @@ let graphInitiate = (mail) => {
         let shownIncome = retrieveObject(incomeData);
         let shownOutcome = retrieveObject(outcomeData);
         let shownBalance = retrieveObject(balanceData);
-        let listMonth = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-        if (shownLabels.length > 4) {
+        if (shownLabels.length > 2) {
             new Chart(balanceGraphElement, {
                 type: "line",
                 data: {
@@ -193,6 +192,7 @@ let graphInitiate = (mail) => {
 };
 
 let insertEmptyElement = () => {
+    Swal.fire("Informasi", "Kamu perlu menambahkan data transaksi minimal sebanyak 3 hari untuk melihat rekapitulasi keuangan kamu secara grafis", "info");
     document.querySelector("#balanceGraph").style.height = "0px";
     document.querySelector("#incomeGraph").style.height = "0px";
     document.querySelector("#outcomeGraph").style.height = "0px";
