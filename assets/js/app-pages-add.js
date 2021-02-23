@@ -173,6 +173,9 @@ let createDetailedData = (type, exactTime, day, month, year, data, elementName, 
 };
 
 let integerToCurrency = (value, element = null) => {
+    if (typeof value === "string" && value.includes("Rp. ")) {
+        value = currencyToInteger(value);
+    }
     value = parseInt(value);
     let sign;
     if (value < 0) {

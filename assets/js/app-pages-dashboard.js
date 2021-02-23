@@ -217,7 +217,7 @@ const showListTransaction = (mail) => {
                                 });
                             },
                             onCloseEnd: () => {
-                                if (document.querySelector("#name").value === "" || document.querySelector("#amount").value === "") {
+                                if (document.querySelector("#name").value === "" || document.querySelector("#amount").value === "" || document.querySelector("#amount").value === "Rp. ") {
                                     M.Modal.getInstance(document.querySelector(".modal")).open();
                                     console.log("here");
                                 } else {

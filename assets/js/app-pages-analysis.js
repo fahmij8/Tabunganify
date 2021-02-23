@@ -218,8 +218,9 @@ let waitBuildingModel = () => {
     emptyDataElement.forEach((elements) => {
         elements.innerHTML = `
     <div class="transaction-empty">
-        <img src="./assets/images/empty.png" />
-        <span>Tunggu sebentar, Sistem cerdas kami sedang mengkalkulasi keuangan kamu!</span>
+        <img src="./assets/images/loading.png" />
+        <span>Tunggu sebentar, Tetaplah di tab ini. Sistem cerdas kami sedang menganalisis keuangan kamu!</span><br>
+        <span id="progress"></span>
     </div>
     `;
     });
@@ -310,6 +311,7 @@ let createModel = async (retrievedData, need) => {
         mae = history.history.mae[0];
         val_mae = history.history.val_mae[0];
         epoch -= 1;
+        document.querySelector("#progress").innerHTML = `${Math.ceil((epoch / 299) * 100)}%`;
     }
     let predictionResult = normalizedData.slice(-2);
     while (predictionResult[predictionResult.length - 1] >= 0) {
