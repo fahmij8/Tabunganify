@@ -198,7 +198,8 @@ let predictionInitiate = async (mail) => {
 
 let insertEmptyElement = () => {
     Swal.fire("Informasi", "Kamu perlu menambahkan data transaksi minimal sebanyak 10 hari untuk melihat analisis keuangan yang terprediksi", "info");
-    document.querySelector("#balancePredictGraph").style.height = "0px";
+    document.querySelector("#balancePredictGraph").style.display = "none";
+    document.querySelector("#balancePredictExtras").style.display = "none";
     let emptyDataElement = document.querySelectorAll(".dataEmpty");
     emptyDataElement.forEach((elements) => {
         elements.innerHTML = `
