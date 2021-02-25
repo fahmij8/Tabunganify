@@ -240,15 +240,14 @@ let createModel = async (retrievedData, need) => {
     const model = await tf.sequential();
     model.add(
         tf.layers.simpleRNN({
-            units: 128,
-            recurrentInitializer: "glorotNormal",
+            units: 16,
             inputShape: [2, 1],
+            returnSequences: true,
         })
     );
     model.add(
-        tf.layers.dense({
+        tf.layers.simpleRNN({
             units: 8,
-            activation: "relu",
         })
     );
     model.add(
